@@ -1,0 +1,25 @@
+name: "printArgsWithPyscript"
+author: "nrd"
+description: "Using python script to print the args which are passed in the command line"
+inputs:
+  firstarg:
+    required: true
+  secondarg:
+    required: true
+  thirdarg:
+    required: true
+  fourtharg:
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+  - name: Check Python Version
+    run: python -V
+    shell: bash  
+  - name: Set GitHub Path
+    run: echo "$GITHUB_WORKSPACE" >> $GITHUB_PATH
+    shell: bash
+  - name: Run Py Script
+    run: python ptest.py ${{ inputs.firstarg }} ${{ inputs.secondarg }} ${{ inputs.thirdarg }} ${{ inputs.fourtharg }}
+    shell: bash 
