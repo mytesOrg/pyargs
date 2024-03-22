@@ -24,4 +24,7 @@ runs:
       GITHUB_ACTION_PATH: ${{ github.action_path }}    
   - name: Run Py Script
     run: python ptest.py ${{ inputs.firstarg }} ${{ inputs.secondarg }} ${{ inputs.thirdarg }} ${{ inputs.fourtharg }}
-    shell: bash 
+    shell: bash
+    env:
+      GITHUB_ACTION_PATH: ${{ github.action_path }}
+    
