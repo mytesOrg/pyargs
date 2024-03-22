@@ -23,11 +23,17 @@ runs:
     run: |
       cd $GITHUB_ACTION_PATH
       ls -la
-    shell: bash        
+    shell: bash
+  - name: Validate Inputs
+    run: |
+      [[ "${{ inputs.firstarg }}" ]] || { echo "firstarg input is empty" ; exit 1; }
+      [[ "${{ inputs.secondarg }}" ]] || { echo "secondarg input is empty" ; exit 1; }
+      [[ "${{ inputs.thirdarg }}" ]] || { echo "thirdarg input is empty" ; exit 1; }    
+    shell: bash
   - name: Run Py Script
     env:
       GITHUB_ACTION_PATH: ${{ github.action_path }}   
-    run: python ptest.py ${{ inputs.firstarg }} ${{ inputs.secondarg }} ${{ inputs.thirdarg }} ${{ inputs.fourtharg }}
+    run: |
+      cd $GITHUB_ACTION_PATH
+      python ptest.py ${{ inputs.firstarg }} ${{ inputs.secondarg }} ${{ inputs.thirdarg }} ${{ inputs.fourtharg }}
     shell: bash
-    
-    
