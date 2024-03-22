@@ -18,16 +18,17 @@ runs:
     run: python -V
     shell: bash  
   - name: list Action Repo
+    env:
+      GITHUB_ACTION_PATH: ${{ github.action_path }}
     working-directory: $GITHUB_ACTION_PATH
     run: |
       ls -la
-    shell: bash
+    shell: bash        
+  - name: Run Py Script
     env:
-      GITHUB_ACTION_PATH: ${{ github.action_path }}    
-  - name: Run Py Script 
+      GITHUB_ACTION_PATH: ${{ github.action_path }}
     working-directory: $GITHUB_ACTION_PATH
     run: python ptest.py ${{ inputs.firstarg }} ${{ inputs.secondarg }} ${{ inputs.thirdarg }} ${{ inputs.fourtharg }}
     shell: bash
-    env:
-      GITHUB_ACTION_PATH: ${{ github.action_path }}
+    
     
